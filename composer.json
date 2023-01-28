@@ -1,0 +1,19 @@
+{
+    "name": "kirtan/backup",
+    "description": "This will create your database backup when you run the command",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":"Kirtan",
+            "email":"kirtan@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Kirtan\\Backup\\":"src/"
+        }
+    }
+}
