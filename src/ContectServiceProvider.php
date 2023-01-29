@@ -8,8 +8,6 @@ use Kirtan\Backup\Console\dbBackup;
 class ContectServiceProvider extends ServiceProvider
 {
     public function boot(){
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-
         $this->loadViewsFrom(__DIR__.'/views','contect');
 
         $this->publishes([
@@ -24,7 +22,7 @@ class ContectServiceProvider extends ServiceProvider
             $this->commands([
                 dbBackup::class,
             ]);
-        }        
+        }
     }
 
     public function register(){

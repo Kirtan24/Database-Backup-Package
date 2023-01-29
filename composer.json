@@ -1,6 +1,7 @@
 {
     "name": "kirtan/backup",
     "description": "This will create your database backup when you run the command",
+    "keywords": ["framework", "laravel", "database", "database backup", "backup"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,8 +10,21 @@
             "email":"kirtan@gmail.com"
         }
     ],
+
     "minimum-stability": "stable",
-    "require": {},
+    "prefer-stable": true,
+
+    "require": {
+        "php": "^8.0",        
+        "laravel/framework": "^9.0"
+    },
+
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+
     "autoload": {
         "psr-4": {
             "Kirtan\\Backup\\":"src/"

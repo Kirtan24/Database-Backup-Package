@@ -28,10 +28,7 @@ class dbBackup extends Command
      * @return int
      */
     public function handle()
-    {
-        $ftp=$this->argument('ftp');
-        $ftp_status=($ftp==null)?true:false;
-    
+    {        
         $this->info('Database backup started...');
 
         $path=config('backup.db_backup_path');
@@ -64,6 +61,9 @@ class dbBackup extends Command
         }            
 
         // ftp section        
+
+        $ftp=$this->argument('ftp');
+        $ftp_status=($ftp==null)?true:false;
         if($ftp_status==0){
             
             $files=Storage::disk('ftp')->put($file,'r+');
