@@ -21,7 +21,9 @@
 
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "providers": [
+                "Kirtan\\Backup\\BackupServiceProvider"
+            ]
         }
     },
 

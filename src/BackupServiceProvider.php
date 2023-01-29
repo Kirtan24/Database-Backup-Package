@@ -5,7 +5,7 @@ namespace Kirtan\Backup;
 use Illuminate\Support\ServiceProvider;
 use Kirtan\Backup\Console\dbBackup;
 
-class ContectServiceProvider extends ServiceProvider
+class BackupServiceProvider extends ServiceProvider
 {
     public function boot(){
         $this->loadViewsFrom(__DIR__.'/views','contect');
