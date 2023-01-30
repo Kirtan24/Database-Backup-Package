@@ -47,7 +47,7 @@ To take backup please run the following command
 ```php
     php artisan db:backupmysql
 ```
-It will create a database backup at the path you have given in the 'app/config.php' file or it will be create a backup at default path which is '/database_backup' in your current project.
+It will create a database backup at the path you have given in the `app/config.php` file or it will be create a backup at default path which is `/database_backup` in your current project.
 
 --------------
 
