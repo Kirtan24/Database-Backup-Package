@@ -47,8 +47,7 @@ To take backup please run the following command
 ```php
     php artisan db:backupmysql
 ```
-
-------------
-
 it will create a database backup at the path you have 
+
+--------------
 
