@@ -32,11 +32,11 @@ You can add dynamic FTP connections with following syntax
 ```php
   'ftp' => [
         'host'   => '',
-        'port'  => 21,
         'username' => '',
         'password'   => '',
         'root' => '',
-    ],
+        'port'  => 21,
+    ],    
 ```
 
 Useage
