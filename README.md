@@ -5,36 +5,26 @@
 ## Please EnterThis line to add publish config file on your project
 
 ## php artisan vendor:publish --force --provider=Kirtan\Backup\ContectServiceProvider -->
-Laravel-FTP
+Laravel-Database Backup / Backup in FTP
 ===========
 
-A simple Laravel 5/6/7 ftp service provider.
+A simple Laravel 5/6/7/8/9 ftp service provider.
 
-[![Latest Stable Version](https://poser.pugx.org/anchu/ftp/v/stable)](https://packagist.org/packages/anchu/ftp)
-[![Build Status](https://travis-ci.org/harishanchu/Laravel-FTP.png?branch=master)](https://travis-ci.org/harishanchu/Laravel-FTP)
-[![Quality](https://codeclimate.com/github/harishanchu/Laravel-FTP/badges/gpa.svg)](https://codeclimate.com/github/harishanchu/Laravel-FTP)
-[![Total Downloads](https://poser.pugx.org/anchu/ftp/downloads)](https://packagist.org/packages/anchu/ftp)
-[![License](https://poser.pugx.org/anchu/ftp/license)](https://packagist.org/packages/anchu/ftp)
-### For Laravel 4.x, check [v1.0.0](https://github.com/harishanchu/Laravel-FTP/tree/v1.0.0)
+[![Latest Stable Version](https://poser.pugx.org/anchu/ftp/v/stable)](https://packagist.org/packages/kirtan/backup)
+[![Total Downloads](https://poser.pugx.org/anchu/ftp/downloads)](https://packagist.org/packages/kirtan/backup)
+[![License](https://poser.pugx.org/anchu/ftp/license)](https://packagist.org/packages/kirtan/backup)
 
 Installation
 ------------
 
-Add the package to your `composer.json` and run `composer update`.
-
-    {
-        "require": {
-            "anchu/ftp": "~2.0"
-        }
-    }
 > If you're using Laravel 5.5+ skip the next step, as Laravel auto discover packages.
 Add the service provider in `config/app.php`:
 
-    'Anchu\Ftp\FtpServiceProvider',
+    'Kirtan\Backup\BackupServiceProvider',
 
 Configuration
 ------------
-Run `php artisan vendor:publish --tag=config` and modify the config file(`config/ftp.php`) with your ftp connections.
+Run `php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider` and modify the config file(`config/ftp.php`) with your ftp connections.
 
 You can add dynamic FTP connections with following syntax
 
