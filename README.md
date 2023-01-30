@@ -20,7 +20,8 @@ Installation
 > If you're using Laravel 5.5+ skip the next step, as Laravel auto discover packages.
 Add the service provider in `config/app.php`:
 
-    'Kirtan\Backup\BackupServiceProvider',
+    //Backup ServiceProvider
+    Kirtan\Backup\BackupServiceProvider::class,
 
 Configuration
 ------------
