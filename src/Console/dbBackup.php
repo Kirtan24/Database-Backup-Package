@@ -31,7 +31,7 @@ class dbBackup extends Command
     {        
         $this->info('Database backup started...');
 
-        $path=config('backup.db_backup_path');
+        $path=config('backup.backup_location');
         $mysqlDumpPath=config('backup.mysqldump_path');
 
         if(!File::isDirectory($path)){
