@@ -25,7 +25,7 @@ Add the service provider in `config/app.php`:
 
 Configuration
 ------------
-Run `php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider` and modify the config file(`config/ftp.php`) with your ftp connections.
+Run `php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider` and modify the config file(`config/backup.php`) with your ftp connections.
 
 You can add dynamic FTP connections with following syntax
 
