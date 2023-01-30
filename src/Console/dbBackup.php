@@ -66,7 +66,7 @@ class dbBackup extends Command
         $ftp_status=($ftp==null)?true:false;
         if($ftp_status==0){
             
-            $files=Storage::disk('ftp')->put($file,'r+');
+            $files=Storage::disk(config('backup.ftp'))->put($file,'r+');
 
             $ftp=Storage::disk('ftp')->allFiles();
 
