@@ -4,22 +4,22 @@ return[
 
     /**
      * ---------------------------------------------------------------------
-     * Database Backup Path
+     * Database Backup Location
      * ---------------------------------------------------------------------
      * 
      * The 'db_backup_path' is where you want to backup your database
      * 
-     * if it is empty it will backup automatically at '../database_backup' in your current project
+     * if it will empty it will backup automatically at '../database_backup' in your current laravel project
      */
 
-    'db_backup_path' => 'database_backup',
+    'backup_location' => 'take_backup',
 
     /**
      * ---------------------------------------------------------------------
      * MySQLDump Path
      * ---------------------------------------------------------------------
      * 
-     * the 'mysqlidump_ptah' is the path by which the backup being proccessed
+     * the 'mysqldump_ptah' is the path by which the backup being proccessed
      * 
      * you must have to specify it
      */
@@ -32,14 +32,19 @@ return[
      *--------------------------------------------------------------------------
      *
      * Here are each of the FTP connections setup for your application.
-     *
+     * 
+     * If you will not specifie it we will give you an Exception
+     * 
+     * You Must define all the ftp configuration
      */
 
-    'ftp' => [
-        'host'   => '',
-        'port'  => 21,
-        'username' => '',
-        'password'   => '',
-        'root' => '',
+    'local' => [
+        'ftp' => [
+            'host'   => '',
+            'username' => '',
+            'password'   => '',
+            'root' => '',
+            'port'  => 21,
+        ],
     ],
 ];
