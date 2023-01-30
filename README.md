@@ -8,7 +8,7 @@
 Laravel-Database Backup / Backup in FTP
 ===========
 
-A simple Laravel 5/6/7/8/9 ftp service provider.
+A simple Laravel 8/9 database service provider.
 
 [![Latest Stable Version](https://poser.pugx.org/kirtan/backup/v/stable)](https://packagist.org/packages/kirtan/backup)
 [![Total Downloads](https://poser.pugx.org/kirtan/backup/v/stable)](https://packagist.org/packages/kirtan/backup)
