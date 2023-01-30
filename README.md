@@ -25,9 +25,9 @@ Add the service provider in `config/app.php`:
 
 Configuration
 ------------
-Run `php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider` and modify the config file(`config/backup.php`) with your ftp connections.
+> Run `php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider` and modify the config file(`config/backup.php`) with your ftp connections.
 
-You can add dynamic FTP connections with following syntax
+> You can add dynamic FTP connections with following syntax
 
 ```php
   'ftp' => [
@@ -42,12 +42,12 @@ You can add dynamic FTP connections with following syntax
 Useage
 ------------
 
-To take backup please run the following command
+> To take backup please run the following command
 
 ```php
     php artisan db:backupmysql
 ```
-It will create a database backup at the path you have given in the `app/config.php` file or it will be create a backup at default path which is `/database_backup` in your current project.
+> It will create a database backup at the path you have given in the `app/config.php` file or it will be create a backup at default path which is `/database_backup` in your current project.
 
 --------------
 
