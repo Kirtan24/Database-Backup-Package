@@ -28,66 +28,79 @@ class dbBackup extends Command
      * @return int
      */
     public function handle()
-    {        
-        $this->info('Database backup started...');
+    {  
+        if(config('backup.mysqldump_path') != '')
+        {
+            $this->info('Database backup started...');
 
-        $path=config('backup.backup_location');
-        $mysqlDumpPath=config('backup.mysqldump_path');
-
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }
-
-        $file=env('DB_DATABASE')."_".strtotime(now()).".sql";
-
-        $command= $mysqlDumpPath." --user=".env('DB_USERNAME')." --password=".env('DB_PASSWORD')." --host=".env('DB_HOST')." ".env('DB_DATABASE')." > ".$path."/".$file;
-
-        $returnVar = NULL;
-        $output = NULL;
-        exec($command,$output,$returnVar);
-
-        // laravel section
-        $files=glob($path.'/*.sql');
+            $path=config('backup.backup_location');
+            if($path != '')
+                $this->info('Your database is stroed at -> '.$path);
+            else{
+                $path=storage_path('app/database_backup');
+                $this->info('Your database is stroed at -> '.$path);
+            }
             
-        usort($files,function($a,$b){
-            return filemtime($a) < filemtime($b);
-        });
+            $mysqlDumpPath=config('backup.mysqldump_path');
 
-        $keep=array_slice($files,0,5);
-        $delete=array_slice($files,5);
+            if(!File::isDirectory($path)){
+                File::makeDirectory($path, 0777, true, true);
+            }
 
-        foreach($delete as $d){
-            unlink($d);
-        }            
+            $file=env('DB_DATABASE')."_".strtotime(now()).".sql";
 
-        // ftp section        
+            $command= $mysqlDumpPath." --user=".env('DB_USERNAME')." --password=".env('DB_PASSWORD')." --host=".env('DB_HOST')." ".env('DB_DATABASE')." > ".$path."/".$file;
 
-        $ftp=$this->argument('ftp');
-        $ftp_status=($ftp==null)?true:false;
-        if($ftp_status==0){
-            
-            $files=Storage::disk(config('backup.ftp'))->put($file,'r+');
+            $returnVar = NULL;
+            $output = NULL;
+            exec($command,$output,$returnVar);
 
-            $ftp=Storage::disk('ftp')->allFiles();
-
-            usort($ftp,function($a,$b){
-                return Storage::disk('ftp')->lastModified($a) <=> Storage::disk('ftp')->lastModified($b);
+            // laravel section
+            $files=glob($path.'/*.sql');
+                
+            usort($files,function($a,$b){
+                return filemtime($a) < filemtime($b);
             });
 
-            $keep = array_slice($ftp, -5);
-            $delete = array_diff($ftp, $keep);
+            $keep=array_slice($files,0,5);
+            $delete=array_slice($files,5);
 
             foreach($delete as $d){
-                if(Storage::disk('ftp')->exists($d)){
-                    Storage::disk('ftp')->delete($d);
+                unlink($d);
+            }            
+
+            // ftp section        
+
+            $ftp=$this->argument('ftp');
+            $ftp_status=($ftp==null)?true:false;
+            if($ftp_status==0){
+                // $this->info(config("backup.ftp"));
+                $files=Storage::disk(config('backup.ftp'))->put($file,'r+');
+
+                $ftp=Storage::disk(config('backup.ftp'))->allFiles();
+
+                usort($ftp,function($a,$b){
+                    return Storage::disk(config('backup.ftp'))->lastModified($a) <=> Storage::disk(config('backup.ftp'))->lastModified($b);
+                });
+
+                $keep = array_slice($ftp, -5);
+                $delete = array_diff($ftp, $keep);
+
+                foreach($delete as $d){
+                    if(Storage::disk(config('backup.ftp'))->exists($d)){
+                        Storage::disk(config('backup.ftp'))->delete($d);
+                    }
                 }
             }
-        }
 
+            else{
+            }
+
+            $this->newLine();
+            $this->info('Database Backup Created Successfully...');
+        }
         else{
+            $this->error('somthing went wrong when finding mysqldump path..!!');           
         }
-
-        $this->newLine();
-        $this->info('Database Backup Created Successfully...');
     }
 }

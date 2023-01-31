@@ -37,12 +37,13 @@ return[
      * 
      * You Must define all the ftp configuration
      */
-    
-    'ftp' => [
-        'host'   => '',
-        'username' => '',
-        'password'   => '',
-        'root' => '',
-        'port'  => 21,
-    ],    
+    'disks' => [
+        'ftp' => [
+            'host'   => '',
+            'username' => '',
+            'password'   => '',
+            'root' => '',
+            'port'  => 21,
+        ],
+    ]
 ];
