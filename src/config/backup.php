@@ -12,7 +12,7 @@ return[
      * if it will empty it will backup automatically at '../database_backup' in your current laravel project
      */
 
-    'backup_location' => 'take_backup',
+    'backup_location' => '',
 
     /**
      * ---------------------------------------------------------------------
@@ -24,7 +24,7 @@ return[
      * you must have to specify it
      */
 
-    'mysqldump_path' => 'C:\xampp\mysql\bin\mysqldump.exe',
+    'mysqldump_path' => '/usr/bin/mysqldump.exe',
     
     /**
      *--------------------------------------------------------------------------
