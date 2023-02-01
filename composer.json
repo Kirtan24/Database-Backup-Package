@@ -13,8 +13,9 @@
 
     "scripts": {
         "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",            
-            "@php artisan vendor:publish --force --provider=Kirtan\\Backup\\BackupServiceProvider"
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",  
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --provider=Kirtan\\BackupServicePckup\\Barovider"
         ]
     },
     
