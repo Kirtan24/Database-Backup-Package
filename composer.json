@@ -10,6 +10,13 @@
             "email":"kirtan@gmail.com"
         }
     ],
+
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",            
+            "@php artisan vendor:publish --force --provider=Kirtan\\Backup\\BackupServiceProvider"
+        ]
+    },
     
     "require": {
         "php": ">=7.2",

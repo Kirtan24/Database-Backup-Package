@@ -37,7 +37,7 @@ class dbBackup extends Command
             if($path != '')
                 $this->info('Your database is stroed at -> '.$path);
             else{
-                $path=storage_path('app/database_backup');
+                $path=public_path('\database_backup');
                 $this->info('Your database is stroed at -> '.$path);
             }
             
