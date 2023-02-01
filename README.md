@@ -21,7 +21,7 @@ Configuration
 > Run the following coomand and modify the config file(`config/backup.php`) with your ftp connections.
 
 ```php
-    `php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider`
+    php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider
 ```
 
 > You can add dynamic FTP connections with following syntax

@@ -9,7 +9,7 @@ return[
      * 
      * The 'db_backup_path' is where you want to backup your database
      * 
-     * if it will empty it will backup automatically at '../database_backup' in your current laravel project
+     * if it will empty it will backup automatically at 'public/database_backup' in your current laravel project
      */
 
     'backup_location' => '',
@@ -24,7 +24,7 @@ return[
      * you must have to specify it
      */
 
-    'mysqldump_path' => '/usr/bin/mysqldump.exe',
+    'mysqldump_path' => 'C:\xampp\mysql\bin\mysqldump',
     
     /**
      *--------------------------------------------------------------------------

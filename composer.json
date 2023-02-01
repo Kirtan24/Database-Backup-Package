@@ -10,18 +10,10 @@
             "email":"kirtan@gmail.com"
         }
     ],
-
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",  
-            "@php artisan package:discover --ansi",
-            "@php artisan vendor:publish --force --provider=Kirtan\\BackupServicePckup\\Barovider"
-        ]
-    },
     
     "require": {
-        "php": ">=7.2",
-        "illuminate/support": "7.0.* || 8.0.* || 9.*"
+        "php": ">=7",
+        "illuminate/support": "7.* || 8.* || 9.*"
     },
 
     "extra": {
