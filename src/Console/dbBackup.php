@@ -75,20 +75,22 @@ class dbBackup extends Command
             $ftp_status=($ftp==null)?true:false;
             if($ftp_status==0){
                 // $this->info(config("backup.ftp"));
-                $files=Storage::disk(config('backup.ftp'))->put($file,'r+');
+                $drive=config('backup.ftp');
+                $config=Storage::disk($drive);
+                $files=$config->put($file,'r+');
 
-                $ftp=Storage::disk(config('backup.ftp'))->allFiles();
+                $ftp=$config->allFiles();
 
                 usort($ftp,function($a,$b){
-                    return Storage::disk(config('backup.ftp'))->lastModified($a) <=> Storage::disk(config('backup.ftp'))->lastModified($b);
+                    return Storage::disk($drive)->lastModified($a) <=> Storage::disk($drive)->lastModified($b);
                 });
 
                 $keep = array_slice($ftp, -5);
                 $delete = array_diff($ftp, $keep);
 
                 foreach($delete as $d){
-                    if(Storage::disk(config('backup.ftp'))->exists($d)){
-                        Storage::disk(config('backup.ftp'))->delete($d);
+                    if($config->exists($d)){
+                        $config->delete($d);
                     }
                 }
             }

@@ -24,6 +24,17 @@ Configuration
     php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider
 ```
 
+> You have to provide a path of mysqldump to us
+
+> If you are using `xampp` in your computer you will find the mysqldump at `<xampp\mysql\bin>` directory
+
+> If you are using `linux` in your computer you will find the mysqldump at `<root/bin>` directory
+
+> You have set that path at :
+```php
+    'mysqldump_path' => ''
+```
+
 > You can add dynamic FTP connections with following syntax
 
 ```php
@@ -39,12 +50,19 @@ Configuration
 Useage
 ------------
 
-> To take backup please run the following command
+> To take backup oon local please run the following command
 
 ```php
     php artisan db:backupmysql
 ```
 > It will create a database backup at the path you have given in the `app/config.php` file or it will be create a backup at default path which is `public/database_backup` in your current project.
+
+> To take backup on local and ftp serevr too please run the following command
+
+```php
+    php artisan db:backupmysql ftp
+```
+> It will create a database backup at the path you have given in the `app/config.php` file in `root`.
 
 --------------
 
