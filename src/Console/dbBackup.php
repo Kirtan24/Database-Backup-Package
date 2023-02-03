@@ -35,10 +35,10 @@ class dbBackup extends Command
 
             $path=config('backup.backup_location');
             if($path != '')
-                $this->info('Your database is stroed at -> '.$path);
+                $this->info('Your database backup is stroed at -> '.$path);
             else{
                 $path=public_path('\database_backup');
-                $this->info('Your database is stroed at -> '.$path);
+                $this->info('Your database backup is stroed at -> '.$path);
             }
             
             $mysqlDumpPath=config('backup.mysqldump_path');
@@ -74,25 +74,24 @@ class dbBackup extends Command
             $ftp=$this->argument('ftp');
             $ftp_status=($ftp==null)?true:false;
             if($ftp_status==0){
-                // $this->info(config("backup.ftp"));
-                $drive=config('backup.ftp');
-                $config=Storage::disk($drive);
-                $files=$config->put($file,'r+');
-
-                $ftp=$config->allFiles();
-
-                usort($ftp,function($a,$b){
-                    return Storage::disk($drive)->lastModified($a) <=> Storage::disk($drive)->lastModified($b);
-                });
-
-                $keep = array_slice($ftp, -5);
-                $delete = array_diff($ftp, $keep);
-
-                foreach($delete as $d){
-                    if($config->exists($d)){
-                        $config->delete($d);
-                    }
+                $config=config('backup.ftp');
+                $server_root=$config['root'];                
+                $ftp_connect=ftp_connect($config['host'],21) or die("Couldn't Connect to -> ".$config['host']);
+                ftp_login($ftp_connect,$config['username'],$config['password']) or die("Connection Failed");
+                ftp_pasv($ftp_connect,true);
+                if(ftp_put($ftp_connect,"$server_root/$file","$path/$file",FTP_ASCII)){
+                    echo "Backup Success -> ".$file;
                 }
+                else{
+                    echo "Failed To Backup -> ".$file;
+                }
+                function clean_nlist($ftp_connect , $server_dir){
+                    $files_on_ftp=ftp_nlist($ftp_connect,$server_dir);
+                    return array_values(array_diff($files_on_ftp,array($server_dir.'/.',$server_dir.'/..')));
+                }                
+                $files_on_ftp=clean_nlist($ftp_connect,$server_root);                                
+            
+                ftp_close($ftp_connect);
             }
 
             else{
