@@ -13,7 +13,7 @@ class dbBackup extends Command
      *
      * @var string
      */    
-    protected $signature = "db:backupmysql {ftp?}";
+    protected $signature = "db:backup {--ftp : Use this option to take backup on your FTP server}";
 
     /**
      * The console command description.
@@ -51,8 +51,10 @@ class dbBackup extends Command
             $output = NULL;
             //Running Command
             exec($command,$output,$returnVar);
+
             //Sorting For Last 5 Database Backup
-            //------------------------------------------------
+            //------------------------------------------------//
+            
             // laravel shorting section
             $files=glob($path.'/*.sql');
                 
@@ -64,13 +66,13 @@ class dbBackup extends Command
             foreach($delete as $d){
                 unlink($d);
             }
-            //------------------------------------------------
+            //------------------------------------------------//
+
+            //--------------------FTP section------------------------//
+            // $ftp=$this->argument('ftp');
+            // $ftp_status=($ftp==null)?true:false;
             
-            //------------------------------------------------
-            // ftp section        
-            $ftp=$this->argument('ftp');
-            $ftp_status=($ftp==null)?true:false;
-            if($ftp_status==0){                
+            if($this->option('ftp')){
                 $config=config('backup.ftp');                
                 if($config['host'] == null || $config['username'] == null || $config['password'] == null || $config['root'] == null)
                     $this->error("-> * Please fill required field at `config/backup.php`");
@@ -92,7 +94,10 @@ class dbBackup extends Command
                     else{
                     }
                     //------------------------------------------------------------
+
+
                     //------------------------------------------------------------
+
                     //Putting the backup file in FTP server                    
                     if(ftp_put($ftp_connect,"$server_root/$file","$path/$file",FTP_ASCII)){
                         $this->info('-> Backup Success -> '.$file);
@@ -105,7 +110,10 @@ class dbBackup extends Command
                         return array_values(array_diff($files_on_ftp,array($server_dir.'/.',$server_dir.'/..')));
                     }
                     //------------------------------------------------------------
+
+
                     //------------------------------------------------------------
+
                     //Sorting For Last 5 Database Backup
                     $backup_files=clean_nlist($ftp_connect,$server_root);
                     usort($backup_files,function($a,$b) use ($ftp_connect){

@@ -52,20 +52,37 @@ Configuration
 
 Useage
 ------------
+> To know all option run :
 
-> To take backup oon local please run the following command
+```php
+    php artisan db:backupmysql --help
+```
+
+`OR`
+
+```php
+    php artisan db:backupmysql -h
+```            
+
+> To take backup locally run following command : 
 
 ```php
     php artisan db:backupmysql
 ```
-> It will create a database backup at the path you have given in the `app/config.php` file or it will be create a backup at default path which is `public/database_backup` in your current project.
 
-> To take backup on local and ftp serevr too please run the following command
+> It will create a database backup at the path you have given in the `app/config.php` file `OR` it will be create a backup at default public path if you don't give location which is `public/database_backup` in your current project.
+
+> To take backup on locally and on FTP serevr run following command
+
+> Use the `--ftp` option for the FTP
 
 ```php
-    php artisan db:backupmysql ftp
+    php artisan db:backupmysql --ftp
 ```
+
 > It will create a database backup at the path you have given in the `app/config.php` file in `root`.
+
+> If the directory givenn is not avalilable it will create if you give `true` to the `force` option at `config\backup.php`
 
 --------------
 
