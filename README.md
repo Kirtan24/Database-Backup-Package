@@ -48,6 +48,8 @@ Configuration
     ],
 ```
 
+> If force key is true then your root directory wil created automatcally if not exist.
+
 Useage
 ------------
 
