@@ -21,7 +21,7 @@ Configuration
 > Run the following coomand and modify the config file(`config/backup.php`) with your ftp connections.
 
 ```php
-    php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider
+php artisan vendor:publish --force --provider=Kirtan\Backup\BackupServiceProvider
 ```
 
 > You have to provide a path of mysqldump to us
@@ -32,7 +32,7 @@ Configuration
 
 > You have set that path at :
 ```php
-    'mysqldump_path' => ''
+'mysqldump_path' => ''
 ```
 
 > You can add dynamic FTP connections with following syntax
@@ -55,19 +55,19 @@ Useage
 > To know all option run :
 
 ```php
-    php artisan db:backup --help
+php artisan db:backup --help
 ```
 
 `OR`
 
 ```php
-    php artisan db:backup -h
+php artisan db:backup -h
 ```            
 
 > To take backup locally run following command : 
 
 ```php
-    php artisan db:backup
+php artisan db:backup
 ```
 
 > It will create a database backup at the path you have given in the `app/config.php` file `OR` it will be create a backup at default public path if you don't give location which is `public/database_backup` in your current project.
@@ -77,7 +77,7 @@ Useage
 > Use the `--ftp` option for the FTP
 
 ```php
-    php artisan db:backup --ftp
+php artisan db:backup --ftp
 ```
 
 > It will create a database backup at the path you have given in the `app/config.php` file in `root`.
