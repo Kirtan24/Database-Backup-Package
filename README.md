@@ -44,7 +44,8 @@ Configuration
         'password'   => '',
         'root' => '',
         'port'  => 21,
-    ],    
+        'force' => false,
+    ],
 ```
 
 Useage
