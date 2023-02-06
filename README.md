@@ -1,7 +1,7 @@
 Laravel-Database Backup / Backup in FTP
 ===========
 
-A simple Laravel 8/9 database service provider.
+A simple Laravel database service provider.
 
 [![Latest Stable Version](https://poser.pugx.org/kirtan/backup/v/stable)](https://packagist.org/packages/kirtan/backup)
 [![Total Downloads](https://poser.pugx.org/kirtan/backup/downloads)](https://packagist.org/packages/kirtan/backup)
@@ -55,19 +55,19 @@ Useage
 > To know all option run :
 
 ```php
-    php artisan db:backupmysql --help
+    php artisan db:backup --help
 ```
 
 `OR`
 
 ```php
-    php artisan db:backupmysql -h
+    php artisan db:backup -h
 ```            
 
 > To take backup locally run following command : 
 
 ```php
-    php artisan db:backupmysql
+    php artisan db:backup
 ```
 
 > It will create a database backup at the path you have given in the `app/config.php` file `OR` it will be create a backup at default public path if you don't give location which is `public/database_backup` in your current project.
@@ -77,7 +77,7 @@ Useage
 > Use the `--ftp` option for the FTP
 
 ```php
-    php artisan db:backupmysql --ftp
+    php artisan db:backup --ftp
 ```
 
 > It will create a database backup at the path you have given in the `app/config.php` file in `root`.
