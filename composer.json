@@ -1,6 +1,6 @@
 {
     "name": "kirtan/backup",
-    "description": "This will create your database backup when you run the command",
+    "description": "Backup your Database Very Easily & Fast on Locally And FTP Using Command in Laravel",
     "keywords": ["database", "backup" , "database backup"],
     "type": "library",
     "license": "MIT",
