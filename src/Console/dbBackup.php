@@ -146,7 +146,7 @@ class dbBackup extends Command
                             foreach($delete as $d){
                                 ftp_delete($ftp_connect,$d);
                             }
-                            // ------------------------------------------------------------
+                            // -----------------------------------------------------------
                             ftp_close($ftp_connect);
                         }
                         else{
