@@ -6,7 +6,8 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-// use App\
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class dbBackup extends Command
 {    
@@ -30,17 +31,26 @@ class dbBackup extends Command
      * @return int
      */
     public function handle()
-    {                  
+    {                              
         if(config('backup.mysqldump_path') != '')
-        {
-            $this->info('-> Database backup started...');
+        {            
             $path=config('backup.backup_location');
-            if($path != '')
-                $this->info('-> Your database backup is stroed at -> '.$path);
+            if(!($this->option('ftp')))
+                $progressBar1 = $this->output->createProgressBar(3);
+            else
+                $progressBar1 = $this->output->createProgressBar(4);                
+            $progressBar1->start();
+            $this->info('   -> Database backup started...');
+            sleep(2);            
+            if($path != ''){  
+                $progressBar1->advance(1);
+                $this->info('   -> Your database backup is stroed at -> '.$path);                                
+            }            
             else{
                 $path=public_path('\database_backup');
-                $this->info('-> Your database backup is stroed at -> '.$path);
-            }
+                $progressBar1->advance(1);
+                $this->info('   -> Your database backup is stroed at -> '.$path);                
+            }            
             //If Directory doesn't exist it wil create a new directory
             if(!File::isDirectory($path)){
                 File::makeDirectory($path, 0777, true, true);
@@ -69,16 +79,20 @@ class dbBackup extends Command
                 foreach($delete as $d){
                     unlink($d);
                 }
-
-                $this->info('-> Database Backup Created Successfully...');
+                
+                $progressBar1->advance(1);
+                $this->info('   -> Last 5 backups stored successfully');
+                
                 //------------------------------------------------//
 
                 //--------------------FTP section------------------------//            
                 if($this->option('ftp')){
                     $dir_flg=1;
                     $config=config('backup.ftp');
-                    if($config['host'] == null || $config['username'] == null || $config['password'] == null || $config['root'] == null)
-                        $this->error("-> * Please fill required field at `config/backup.php`");
+                    if($config['host'] == null || $config['username'] == null || $config['password'] == null || $config['root'] == null){
+                        $progressBar1->advance(-1);
+                        $this->error("  -> * Please fill required field at `config/backup.php`");
+                    }
                     else{
                         //Checking connection and taking backup
                         $server_root=$config['root'];
@@ -94,7 +108,8 @@ class dbBackup extends Command
                             }
                             elseif(ftp_nlist($ftp_connect,$server_root) == false && $config['force'] == false){
                                 $dir_flg=0;
-                                throw new Exception("-> * The directory you given is not exist in your FTP...\n-> * If you want to create the directory automaticaly if not exist then give force option `true` in config file `config/backup.php` file");                        
+                                $progressBar1->advance(-1);
+                                throw new Exception("   -> * The directory you given is not exist in your FTP...\n-> * If you want to create the directory automaticaly if not exist then give force option `true` in config file `config/backup.php` file");                        
                             }
                             else{
                             }
@@ -104,17 +119,18 @@ class dbBackup extends Command
                         
                         //------------------------------------------------------------
 
-
                         //------------------------------------------------------------
 
                         //Putting the backup file in FTP server
                         if($dir_flg==1)
                         {
                             if(ftp_put($ftp_connect,"$server_root/$file","$path/$file",FTP_ASCII)){
-                                $this->info('-> Backup Success -> '.$file);
+                                $progressBar1->advance(1);
+                                $this->info('   -> Backup Success at FTP -> '.$file);
                             }
                             else{
-                                $this->info('-> * Failed To Backup..!');
+                                $progressBar1->advance(-1);
+                                $this->error('   -> * Failed To Backup at FTP..!');
                             }
                             function clean_nlist($ftp_connect , $server_dir){
                                 $files_on_ftp=ftp_nlist($ftp_connect,$server_dir);
@@ -130,21 +146,25 @@ class dbBackup extends Command
                             foreach($delete as $d){
                                 ftp_delete($ftp_connect,$d);
                             }
-                            //------------------------------------------------------------
+                            // ------------------------------------------------------------
                             ftp_close($ftp_connect);
                         }
                         else{
 
-                        }                    
-                    }    
-                }                                       
+                        }
+                    }
+                }
+                $progressBar1->advance(1);
+                $this->info('   -> Database Backup Created Successfully...');
+                $progressBar1->finish();
             }
             else{
-                $this->error('-> * Please give propper path of the `mysqldump`');
-            }            
+                $progressBar1->advance(-1);
+                $this->error('  -> * Please give propper path of the `mysqldump`');
+            }
         }
         else{
-            $this->error('-> * Please enter `mysqldump` path..!!');
-        }        
+            $this->error('  -> * Please enter `mysqldump` path..!!');
+        }  
     }
 }
