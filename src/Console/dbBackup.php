@@ -38,7 +38,13 @@ class dbBackup extends Command
             if(!($this->option('ftp')))
                 $progressBar1 = $this->output->createProgressBar(3);
             else
-                $progressBar1 = $this->output->createProgressBar(4);                
+                $progressBar1 = $this->output->createProgressBar(4);      
+
+
+            // ProgressBar::setFormatDefinition(
+            //     'minimal',
+            //     '<info>%percent%</info>\033[32m%\033[0m <fg=white;bg=blue>%remaining%</>'
+            // );          
             $progressBar1->start();
             $this->info('   -> Database backup started...');
             sleep(2);            
