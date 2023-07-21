@@ -24,7 +24,7 @@ return[
      * you must have to specify it
      */
 
-    'mysqldump_path' => 'C:\xampp\mysql\bin\mysqldump',
+    'mysqldump_path' => '/usr/bin/mysqldump',
     
     /**
      *--------------------------------------------------------------------------
@@ -43,6 +43,25 @@ return[
         'password'   => '',
         'root' => '',
         'port'  => 21,
+        'force' => false,
+    ],
+
+    /**
+     *--------------------------------------------------------------------------
+     * Drive Connections
+     *--------------------------------------------------------------------------
+     *
+     * Here are each of the drive connections setup for your application.
+     * 
+     * If you will not specifie it we will give you an Exception
+     * 
+     * You Must define all the drive configuration
+     */
+    'drive' => [
+        'CLIENT_ID' => '',
+        'CLIENT_SECRET' => '',
+        'REFRESH_TOKEN' => '',
+        'FOLDER_ID' => '',
         'force' => false,
     ],
 ];

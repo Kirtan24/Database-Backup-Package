@@ -86,3 +86,14 @@ php artisan db:backup --ftp
 
 --------------
 
+> To take backup on locally and on Google Drive run following command
+
+> Use the `--drive` option for the Drive Backup
+
+```php
+php artisan db:backup --drive
+```
+
+> It will create a database backup at the folder you have given in the `app/config.php` file in `folder_id`.
+
+--------------
